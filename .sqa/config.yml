@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/HI-FRIENDS-SDC2/hi-friends:
+      branch: master
+      repo: https://github.com/HI-FRIENDS-SDC2/hi-friends
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-amethyst-crab.sh
+        container: qc.acc_ready-teal-bear
+  QC.Doc:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-viridian-spider.sh
+        container: qc.doc_smelly-tan-stoat
+      github.com/HI-FRIENDS-SDC2/hi-friends git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-amethyst-oriole.sh
+        container: qc.doc_freaky-turquoise-maltese
+      github.com/HI-FRIENDS-SDC2/hi-friends markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-goldenrod-squirrel.sh
+        container: qc.doc_woozy-blue-jaguar
+      github.com/HI-FRIENDS-SDC2/hi-friends restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-xanthic-gopher.sh
+        container: qc.doc_pretty-viridian-stoat
+  QC.Lic:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.snoopy-gold-kingfisher.sh
+        container: qc.lic_shaky-pumpkin-cattle
+  QC.Met:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-indigo-dodo.sh
+        container: qc.met_cranky-ivory-uguisu
+  QC.Sec:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-burgundy-saola.sh
+        container: qc.sec_scanty-pear-spoonbill
+  QC.Sty:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-cerise-salamander.sh
+        container: qc.sty_smelly-sapphire-woodpecker
+  QC.Ver:
+    repos:
+      github.com/HI-FRIENDS-SDC2/hi-friends get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-amber-retriever.sh
+        container: qc.ver_clammy-chestnut-giraffe
+timeout: 5400
